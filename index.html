@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Place Detector</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>AI Place Detector</h1>
+            <p>Upload an image and let AI identify where it was taken.</p>
+        </header>
+
+        <main>
+            <div id="upload-section" class="upload-box">
+                <input type="file" id="image-input" accept=".jpg, .jpeg, .png, .webp" hidden>
+                <div class="upload-content" id="upload-content">
+                    <span class="upload-icon">📁</span>
+                    <p>Click to select an image</p>
+                    <p class="sub-text">or drag and drop here</p>
+                    <p class="formats">Supports JPG, PNG, JPEG, WEBP</p>
+                </div>
+                <img id="image-preview" class="hidden" alt="Preview">
+            </div>
+
+            <div class="action-section">
+                <button id="analyze-btn" class="primary-btn hidden">Analyze Image</button>
+            </div>
+
+            <div id="error-message" class="error-msg hidden"></div>
+
+            <div id="loading-state" class="loading-state hidden">
+                <div class="spinner"></div>
+                <p id="loading-text">Analyzing image...</p>
+            </div>
+
+            <div id="result-section" class="result-section hidden">
+                <div id="success-result" class="hidden">
+                    <div class="result-header">
+                        <h2>📍 Likely Location</h2>
+                        <h3 id="res-place"></h3>
+                        <p id="res-city-country" class="location-subtext"></p>
+                    </div>
+
+                    <div class="stats-grid">
+                        <div class="stat-box">
+                            <span class="stat-label">Coordinates</span>
+                            <span id="res-coords" class="stat-value"></span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-label">Confidence</span>
+                            <span id="res-confidence" class="stat-value"></span>
+                        </div>
+                    </div>
+
+                    <div class="details-section">
+                        <h4>Why this location?</h4>
+                        <ul id="res-reasoning"></ul>
+                        
+                        <h4>Detected Clues</h4>
+                        <div class="tags-container">
+                            <div id="res-clues" class="tags"></div>
+                        </div>
+                    </div>
+
+                    <div class="actions">
+                        <a id="btn-maps" href="#" target="_blank" class="primary-btn">Open in Google Maps</a>
+                        <button id="btn-copy" class="secondary-btn">Copy Coordinates</button>
+                    </div>
+                </div>
+
+                <div id="alternatives-section" class="alternatives-section hidden">
+                    <h4>Other Possible Locations</h4>
+                    <ul id="res-alternatives"></ul>
+                </div>
+
+                <div id="low-confidence-result" class="hidden">
+                    <h2>Location could not be determined reliably.</h2>
+                    <p>Confidence: <span id="low-conf-val"></span></p>
+                    <p class="explanation">No distinctive geographical clues were found in this image. It may be too generic, an indoor space without context, or lacking identifiable landmarks.</p>
+                </div>
+            </div>
+        </main>
+        
+        <footer>
+            <p>Your image is used only for location analysis and is not permanently stored by this application.</p>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
